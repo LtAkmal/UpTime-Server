@@ -1,0 +1,56 @@
+[Unit]
+Description=UpTime-Server agent (signed uptime heartbeats)
+Documentation=https://github.com/LtAkmal/UpTime-Server
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=600
+StartLimitBurst=20
+
+[Service]
+Type=simple
+User=uptime-agent
+Group=uptime-agent
+ExecStart=/usr/local/bin/uptime-agent run --config /etc/uptime-agent/agent.conf
+Restart=on-failure
+RestartSec=10s
+TimeoutStopSec=15s
+# The agent sends a signed "stop" event on SIGTERM.
+KillSignal=SIGTERM
+
+# Files: /var/lib/uptime-agent (key, state) is the only writable path.
+StateDirectory=uptime-agent
+StateDirectoryMode=0700
+UMask=0077
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+
+# Privileges.
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged
+SystemCallErrorNumber=EPERM
+
+# Network: IP only (plus local DNS). To allow only the collector, add a drop-in with
+#   IPAddressDeny=any
+#   IPAddressAllow=<collector IP> localhost
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

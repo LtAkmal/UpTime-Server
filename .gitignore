@@ -1,0 +1,39 @@
+# Build output
+/dist/
+/bin/
+*.test
+*.out
+
+# Secrets and local configuration: never commit these
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+agent.conf
+!deploy/config/agent.conf.example
+enrollment.json
+state.json
+*token*.txt
+/keys/
+/secrets/
+
+# Local data
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.sql.gz
+*.dump
+*.log
+/var/
+
+# Collector install output
+collector/laravel/app/Uptime/release.json
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store

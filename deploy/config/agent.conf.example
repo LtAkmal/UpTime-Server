@@ -1,0 +1,28 @@
+# UpTime-Server agent configuration (/etc/uptime-agent/agent.conf).
+# This file holds no secrets: the private key and enrollment data are generated in
+# state_dir and never leave the node. Keep it root-owned, mode 640, group uptime-agent.
+
+# Collector base URL. Use HTTPS for any public deployment.
+collector_url = https://status.example.com
+
+# Development only: a plain-HTTP collector on a local network. The agent logs an
+# insecure-development warning on every start while this is enabled.
+# allow_insecure_http = true
+
+# Development only: skip TLS certificate verification (prefer ca_file instead).
+# insecure_skip_tls_verify = false
+
+# Trust a private CA for the collector certificate.
+# ca_file = /etc/uptime-agent/collector-ca.pem
+
+# Must match the heartbeat interval configured for this node in the collector.
+interval = 30s
+request_timeout = 10s
+
+# Private key, state and enrollment data (created with mode 0700/0600).
+state_dir = /var/lib/uptime-agent
+
+# Optional local health checks. Failures turn the reported status into "degraded";
+# only the number of failed checks is sent, never labels, addresses or paths.
+# check_tcp = wings 127.0.0.1:8080
+# check_disk = /var/lib/pterodactyl 95

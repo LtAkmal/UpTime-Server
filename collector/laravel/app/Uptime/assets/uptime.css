@@ -1,0 +1,115 @@
+/*
+ * UpTime-Server public status page. Scoped to .ut; colours come from the storefront
+ * design tokens when present (tokens.css), with the same values as fallbacks.
+ */
+.ut {
+    --ut-bg: var(--sf-bg, #0a0e15);
+    --ut-surface: var(--sf-surface, #131a25);
+    --ut-surface-2: var(--sf-surface-2, #19212e);
+    --ut-border: var(--sf-border, rgba(148, 163, 184, 0.14));
+    --ut-border-strong: var(--sf-border-strong, rgba(148, 163, 184, 0.26));
+    --ut-text: var(--sf-text, #e7ebf1);
+    --ut-muted: var(--sf-text-muted, #9aa6b7);
+    --ut-accent: var(--sf-accent, #3fb6ff);
+    --ut-ok: var(--sf-ok, #4ade80);
+    --ut-warn: var(--sf-warn, #fbbf24);
+    --ut-danger: var(--sf-danger, #f87171);
+    --ut-info: var(--sf-info, #a78bfa);
+    --ut-none: rgba(148, 163, 184, 0.22);
+    color: var(--ut-text);
+}
+.ut *, .ut *::before, .ut *::after { box-sizing: border-box; }
+.ut-wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.ut-hero { padding: clamp(40px, 6vw, 72px) 0 24px; }
+.ut-eyebrow { color: var(--ut-accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; }
+.ut h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
+.ut h2 { font-size: 1.25rem; margin: 0 0 14px; letter-spacing: -0.01em; }
+.ut h3 { font-size: 1.02rem; margin: 0; }
+.ut p { line-height: 1.6; }
+.ut a { color: var(--ut-accent); }
+.ut a:hover { color: var(--sf-accent-strong, #79cdff); }
+.ut a:focus-visible, .ut button:focus-visible { outline: 2px solid var(--ut-accent); outline-offset: 2px; border-radius: 4px; }
+.ut-lead { color: var(--ut-muted); max-width: 760px; margin: 0; }
+.ut-muted { color: var(--ut-muted); }
+.ut-small { font-size: 0.85rem; }
+.ut-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; word-break: break-all; }
+.ut-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.ut-section { padding: 0 0 40px; }
+
+.ut-overall { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; padding: 18px 20px; border-radius: 14px; border: 1px solid var(--ut-border); background: var(--ut-surface); }
+.ut-overall strong { font-size: 1.15rem; }
+.ut-overall .ut-meta { margin-left: auto; color: var(--ut-muted); font-size: 0.85rem; }
+.ut-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--ut-none); box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.08); }
+.ut-dot.ok { background: var(--ut-ok); box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.14); }
+.ut-dot.warn { background: var(--ut-warn); box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.14); }
+.ut-dot.bad { background: var(--ut-danger); box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.14); }
+
+.ut-notice { margin-top: 14px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--ut-border); background: rgba(167, 139, 250, 0.07); color: var(--ut-text); font-size: 0.9rem; }
+.ut-notice.warn { background: rgba(251, 191, 36, 0.08); border-color: rgba(251, 191, 36, 0.35); }
+.ut-notice.bad { background: rgba(248, 113, 113, 0.08); border-color: rgba(248, 113, 113, 0.35); }
+
+.ut-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 24px 0 32px; }
+.ut-stat { padding: 14px 16px; border-radius: 12px; border: 1px solid var(--ut-border); background: var(--ut-surface); }
+.ut-stat dt { color: var(--ut-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.ut-stat dd { margin: 4px 0 0; font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.ut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.ut-card { border-radius: 14px; border: 1px solid var(--ut-border); background: var(--ut-surface); padding: 18px; min-width: 0; }
+.ut-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.ut-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.ut-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600; border: 1px solid var(--ut-border-strong); color: var(--ut-text); background: rgba(148, 163, 184, 0.08); white-space: nowrap; }
+.ut-badge.ok { color: #bbf7d0; border-color: rgba(74, 222, 128, 0.4); background: rgba(74, 222, 128, 0.1); }
+.ut-badge.warn { color: #fde68a; border-color: rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.1); }
+.ut-badge.bad { color: #fecaca; border-color: rgba(248, 113, 113, 0.45); background: rgba(248, 113, 113, 0.1); }
+.ut-badge.info { color: #ddd6fe; border-color: rgba(167, 139, 250, 0.4); background: rgba(167, 139, 250, 0.1); }
+
+.ut-windows { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 14px; }
+.ut-windows div { padding: 8px 10px; border-radius: 10px; background: var(--ut-surface-2); }
+.ut-windows dt { color: var(--ut-muted); font-size: 0.74rem; }
+.ut-windows dd { margin: 2px 0 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ut-windows small { display: block; color: var(--ut-muted); font-weight: 400; font-size: 0.7rem; }
+
+.ut-bars { display: flex; gap: 2px; align-items: stretch; height: 30px; margin: 4px 0 6px; }
+.ut-bars span { flex: 1; border-radius: 2px; background: var(--ut-none); min-width: 2px; }
+.ut-bars .ok { background: var(--ut-ok); }
+.ut-bars .warn { background: var(--ut-warn); }
+.ut-bars .bad { background: var(--ut-danger); }
+.ut-bars-legend { display: flex; justify-content: space-between; color: var(--ut-muted); font-size: 0.72rem; }
+
+.ut-kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 14px; margin: 0; font-size: 0.88rem; }
+.ut-kv dt { color: var(--ut-muted); }
+.ut-kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.ut-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.ut-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 9px; border: 1px solid var(--ut-border-strong); color: var(--ut-text) !important; text-decoration: none; font-size: 0.86rem; font-weight: 600; background: var(--ut-surface-2); }
+.ut-btn:hover { border-color: var(--ut-accent); }
+.ut-btn.primary { background: var(--ut-accent); color: var(--sf-accent-ink, #04131f) !important; border-color: transparent; }
+
+.ut-two { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; }
+.ut-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--ut-border); }
+.ut-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.ut-table th, .ut-table td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--ut-border); white-space: nowrap; }
+.ut-table th { color: var(--ut-muted); font-weight: 600; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; background: var(--ut-surface); }
+.ut-table tr:last-child td { border-bottom: 0; }
+.ut-note { margin-top: 6px; padding: 8px 10px; border-left: 3px solid var(--ut-info); background: rgba(167, 139, 250, 0.07); font-size: 0.84rem; white-space: normal; }
+.ut-note strong { color: #ddd6fe; }
+
+.ut-explain ol, .ut-explain ul { padding-left: 1.2rem; line-height: 1.65; }
+.ut-explain li { margin-bottom: 6px; }
+.ut-formula { padding: 12px 14px; border-radius: 10px; background: var(--ut-surface-2); border: 1px solid var(--ut-border); overflow-x: auto; }
+.ut pre { margin: 8px 0 0; padding: 12px 14px; border-radius: 10px; background: #070a10; border: 1px solid var(--ut-border); overflow-x: auto; font-size: 0.8rem; color: var(--ut-text); }
+
+@media (max-width: 900px) {
+    .ut-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ut-two { grid-template-columns: 1fr; }
+    .ut-overall .ut-meta { margin-left: 0; width: 100%; }
+}
+@media (max-width: 520px) {
+    .ut-wrap { padding: 0 16px; }
+    .ut-grid { grid-template-columns: 1fr; }
+    .ut-windows { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ut-kv { grid-template-columns: 1fr; gap: 2px; }
+    .ut-kv dd { margin-bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ut * { transition: none !important; animation: none !important; }
+}
