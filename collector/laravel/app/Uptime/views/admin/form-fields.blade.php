@@ -11,8 +11,16 @@
     </select>
     <p class="help-block">Only for administrators; never published.</p>
 </div>
-<div class="checkbox"><label><input type="hidden" name="is_public" value="0"><input type="checkbox" name="is_public" value="1" @checked(old('is_public', $node->is_public ?? true))> Show on the public status page</label></div>
-<div class="checkbox"><label><input type="hidden" name="monitoring_enabled" value="0"><input type="checkbox" name="monitoring_enabled" value="1" @checked(old('monitoring_enabled', $node->monitoring_enabled ?? true))> Monitoring enabled (accept events)</label></div>
+<input type="hidden" name="is_public" value="0">
+<div class="checkbox checkbox-primary">
+    <input id="is_public" type="checkbox" name="is_public" value="1" @checked(old('is_public', $node->is_public ?? true))>
+    <label for="is_public">Show on the public status page</label>
+</div>
+<input type="hidden" name="monitoring_enabled" value="0">
+<div class="checkbox checkbox-primary">
+    <input id="monitoring_enabled" type="checkbox" name="monitoring_enabled" value="1" @checked(old('monitoring_enabled', $node->monitoring_enabled ?? true))>
+    <label for="monitoring_enabled">Monitoring enabled (accept events)</label>
+</div>
 @if($locked ?? false)
     <p class="text-muted"><i class="fa fa-lock"></i> Heartbeat interval {{ $node->interval_seconds }} s, timeout {{ $node->timeout_seconds }} s, tolerance {{ $node->tolerance_seconds }} s and clock window ±{{ $node->skew_seconds }} s are fixed since monitoring began, so past uptime can never be recalculated with different rules. To change them, archive this node and add a new one.</p>
 @else

@@ -142,7 +142,10 @@ sudo systemctl restart uptime-agent</pre>
                                         <form method="POST" action="{{ route('admin.uptime.nodes.keys.revoke', [$node->id, $k->id]) }}" style="margin-top:6px">
                                             @csrf
                                             <input name="reason" class="form-control input-sm" placeholder="Reason" required minlength="5" maxlength="255" aria-label="Revocation reason">
-                                            <label class="small"><input type="checkbox" name="confirm" value="1" required> I understand this key's future events are rejected</label>
+                                            <div class="checkbox checkbox-primary small" style="margin:4px 0">
+                                                <input id="confirm-revoke-{{ $k->id }}" type="checkbox" name="confirm" value="1" required>
+                                                <label for="confirm-revoke-{{ $k->id }}">I understand this key's future events are rejected</label>
+                                            </div>
                                             <button class="btn btn-xs btn-danger">Revoke</button>
                                         </form>
                                     @endif
@@ -158,7 +161,10 @@ sudo systemctl restart uptime-agent</pre>
                         @csrf
                         <label for="public_key" class="small">Or register a public key manually (from <code>uptime-agent keygen</code>)</label>
                         <input id="public_key" name="public_key" class="form-control input-sm" style="font-family:monospace" placeholder="base64 Ed25519 public key" maxlength="64" required>
-                        <label class="small"><input type="checkbox" name="confirm" value="1" required> I copied this public key from the node myself</label>
+                        <div class="checkbox checkbox-primary small" style="margin:4px 0">
+                            <input id="confirm-register" type="checkbox" name="confirm" value="1" required>
+                            <label for="confirm-register">I copied this public key from the node myself</label>
+                        </div>
                         <button class="btn btn-xs btn-default">Register key</button>
                     </form>
                 @endif
@@ -171,7 +177,10 @@ sudo systemctl restart uptime-agent</pre>
                     @csrf
                     <div class="box-header with-border"><h3 class="box-title">Archive</h3></div>
                     <div class="box-body small">Stops accepting events, revokes the active key and hides the node from the public page. All events, incidents and proofs are kept; nothing is deleted.
-                        <div class="checkbox"><label><input type="checkbox" name="confirm" value="1" required> Archive this node</label></div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="confirm-archive" type="checkbox" name="confirm" value="1" required>
+                            <label for="confirm-archive">Archive this node</label>
+                        </div>
                     </div>
                     <div class="box-footer"><button class="btn btn-sm btn-danger">Archive node</button></div>
                 </form>

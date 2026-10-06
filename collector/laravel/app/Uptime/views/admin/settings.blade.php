@@ -20,7 +20,11 @@
             <form method="POST" action="{{ route('admin.uptime.settings.save') }}" class="box box-primary">
                 @csrf
                 <div class="box-body">
-                    <div class="checkbox"><label><input type="hidden" name="status_page_enabled" value="0"><input type="checkbox" name="status_page_enabled" value="1" @checked($settings->statusPageEnabled())> Public status page enabled (<code>/status</code>)</label></div>
+                    <input type="hidden" name="status_page_enabled" value="0">
+                    <div class="checkbox checkbox-primary">
+                        <input id="status_page_enabled" type="checkbox" name="status_page_enabled" value="1" @checked($settings->statusPageEnabled())>
+                        <label for="status_page_enabled">Public status page enabled (<code>/status</code>)</label>
+                    </div>
                     <div class="form-group">
                         <label for="repository_url">Public source repository</label>
                         <input id="repository_url" name="repository_url" class="form-control" required value="{{ old('repository_url', $settings->repositoryUrl()) }}">

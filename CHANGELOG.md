@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 — 2026-10-06
+
+Collector only; the agent is unchanged (0.1.0 agent binaries remain current).
+
+- Admin pages: checkboxes use the panel's own markup (`<input>` + `<label for>`), so their
+  checked state is shown correctly (they always looked unchecked before).
+
 ## 0.1.1 — 2026-10-06
 
 Collector only; the agent is unchanged (0.1.0 agent binaries remain current).
