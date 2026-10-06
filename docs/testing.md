@@ -41,7 +41,7 @@ Run inside a Pterodactyl panel checkout with its test database configured:
 cd /path/to/panel && vendor/bin/phpunit tests/Integration/Uptime
 ```
 
-Covered (40 tests): shared vectors in PHP; ingestion (valid, invalid signature, wrong
+Covered (41 tests): shared vectors in PHP; ingestion (valid, invalid signature, wrong
 key, modified payload, unknown node/key, non-canonical bytes, revoked key, disabled node,
 idempotent duplicate, replay, duplicate sequence, stale sequence, sequence gaps, clock
 window, chain head mismatch, reboot downtime, monotonic/clock/build anomalies, body

@@ -24,8 +24,9 @@ class ReleaseInfo
         $file = __DIR__ . '/../release.json';
         $release = is_file($file) ? (json_decode((string) file_get_contents($file), true) ?: []) : [];
         $commit = (string) ($release['commit'] ?? 'unknown');
-        $digest = Cache::remember('uptime:collector-digest', 600, fn () => self::digest(dirname(__DIR__)));
         $releaseDigest = isset($release['digest']) && preg_match('/^[0-9a-f]{64}$/', (string) $release['digest']) ? (string) $release['digest'] : null;
+        // Keyed by the manifest, so installing another release recomputes it at once.
+        $digest = Cache::remember('uptime:collector-digest:' . ($releaseDigest ?? 'none') . ':' . (is_file($file) ? filemtime($file) : 0), 600, fn () => self::digest(dirname(__DIR__)));
 
         return [
             'version' => (string) ($release['version'] ?? 'dev'),

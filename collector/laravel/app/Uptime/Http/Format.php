@@ -101,7 +101,9 @@ final class Format
     {
         $note = null;
         if (!is_null($w['uptime_percent']) && $w['coverage_percent'] < 99.995) {
-            $note = 'monitored ' . rtrim(rtrim(number_format(floor($w['coverage_percent'] * 10) / 10, 1, '.', ''), '0'), '.') . '% of window';
+            // Rounded down, but never shown as "0%" when monitoring covers part of the window.
+            $pct = $w['coverage_percent'] < 0.1 ? '<0.1' : rtrim(rtrim(number_format(floor($w['coverage_percent'] * 10) / 10, 1, '.', ''), '0'), '.');
+            $note = 'monitored ' . $pct . '% of window';
         }
 
         return [self::percent($w['uptime_percent']), $note];

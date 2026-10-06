@@ -88,6 +88,16 @@ class UptimeProtocolTest extends TestCase
         Protocol::parsePayload(Protocol::encode($fields + ['hostname' => 'secret-host']));
     }
 
+    public function testDisplayNeverOverstatesUptimeOrCoverage(): void
+    {
+        $this->assertSame('99.999%', \Pterodactyl\Uptime\Http\Format::percent(99.99999));
+        $this->assertSame('No data', \Pterodactyl\Uptime\Http\Format::percent(null));
+        $w = ['uptime_percent' => 100.0, 'coverage_percent' => 0.004];
+        $this->assertSame(['100%', 'monitored <0.1% of window'], \Pterodactyl\Uptime\Http\Format::window($w));
+        $this->assertSame(['100%', 'monitored 12.3% of window'], \Pterodactyl\Uptime\Http\Format::window(['uptime_percent' => 100.0, 'coverage_percent' => 12.39]));
+        $this->assertSame(['100%', null], \Pterodactyl\Uptime\Http\Format::window(['uptime_percent' => 100.0, 'coverage_percent' => 100.0]));
+    }
+
     public function testUptimeFormulaEdgeCases(): void
     {
         $t0 = 1_790_000_000_000;

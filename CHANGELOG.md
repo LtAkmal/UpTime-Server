@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 — 2026-10-06
+
+Collector only; the agent is unchanged (0.1.0 agent binaries remain current).
+
+- Status page: a window that monitoring covers by less than 0.1% now says
+  "monitored <0.1% of window" instead of "0%".
+- The installed-files self-check is recomputed immediately after an upgrade (the cached
+  digest is keyed by the release manifest).
+
 ## 0.1.0 — 2026-10-06
 
 First release.
